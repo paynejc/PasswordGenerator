@@ -30,12 +30,6 @@ header {
   color: hsl(206, 17%, 28%);
 }
 
-.title{
-    margin: 0;
-    text-align: center;
-
-}
-
 .card {
   background-color: hsl(0, 0%, 100%);
   border-radius: 5px;
@@ -58,31 +52,6 @@ header {
 
 .card-body {
   min-height: 100px;
-  
-}
-
-.password-display{
- background-color: white;
- color:black;
- padding:1rem;
- border: 1px solid #333;
- height: 2rem;
- width: 350px;
- display: flex;
- justify-content: center;
- align-items: center;
- word-break: break-all;
- border-radius: .5rem;   
-}
-
-.card-body form{
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-row-gap: 1rem;
-column-gap: 3rem;
-
 }
 
 .card-footer {
