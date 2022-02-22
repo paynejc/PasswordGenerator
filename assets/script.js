@@ -52,9 +52,29 @@ function getPasswordOptions() {
   }
 
   var passwordOptions = {
+    passwordLength: passwordLength,
+    includeLowercase: includeLowercase,
+    includeUppercase: includeUppercase,
+    includeSpecial: includeSpecial,
+    includeNumbers: includeNumbers
 
-  }
+  };
+
+  console.log(passwordOptions);
+  return passwordOptions;
 }
+
+function getRandomElement(array) {
+  //generate a random number based on the length of the array
+  //use that number to get a random element  from the array
+  //return that ELEMENT back, not the index
+
+  var randomNumber = Math.floor(Math.random() * array.length);
+  var randomElement = array[randomNumber];
+  return randomElement;
+}
+
+
 
 function generatePassword() {
   //Needs to return final password
@@ -62,6 +82,49 @@ function generatePassword() {
   //Answer prompts
   var userPasswordOptions = getPasswordOptions()
 
+  var allCharacters = [];
+  var requiredCharacters = [];
+  var finalPassword = [];
+
+  if (!userPasswordOptions) {
+    return;
+  }
+
+  //Get the required characters
+
+  if (userPasswordOptions.includeLowercase) {
+    allCharacters = allCharacters.concat(lowerCasedCharacters);
+    requiredCharacters.push(getRandomElement(lowerCasedCharacters));
+  }
+
+  if (userPasswordOptions.includeNumbers) {
+    allCharacters = allCharacters.concat(numericCharacters);
+    requiredCharacters.push(getRandomElement(numericCharacters));
+  }
+
+  if (userPasswordOptions.includeUppercase) {
+    allCharacters = allCharacters.concat(upperCasedCharacters);
+    requiredCharacters.push(getRandomElement(upperCasedCharacters));
+  }
+
+  if (userPasswordOptions.includeSpecial) {
+    allCharacters = allCharacters.concat(specialCharacters);
+    requiredCharacters.push(getRandomElement(specialCharacters));
+  }
+  //The user wants a length based on the input. We know it based on required characters
+
+  for (var i = 0; i < userPasswordOptions.passwordLength; i++) {
+    var character = getRandomElement(allCharacters);
+    finalPassword.push(character);
+  }
+
+
+  for (var i = 0; i < requiredCharacters.length; i++) {
+    finalPassword[i] = requiredCharacters[i];
+  }
+var passwordString = finalPassword.join("");
+console.log(passwordString)
+return passwordString;
 }
 
 //Validate input
@@ -81,7 +144,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 //Add event listener to generate button
